@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "Ezereal Car Controller",
     "maps": [
         {
@@ -18,7 +19,7 @@
                     "name": "Steer",
                     "type": "Value",
                     "id": "1108afcb-3177-4eb5-b045-09910053710b",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -27,7 +28,7 @@
                     "name": "Accelerate",
                     "type": "Value",
                     "id": "f34630ff-e16d-4903-9335-fa0e02a81cb0",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -36,7 +37,7 @@
                     "name": "Brake",
                     "type": "Value",
                     "id": "68512edc-0312-4d01-b020-9719164ebf74",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -46,15 +47,6 @@
                     "type": "Value",
                     "id": "72d29971-0a7c-4330-97cc-bbc0f139c4f6",
                     "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Handbrake",
-                    "type": "Value",
-                    "id": "43699df9-1a67-48a1-88a6-0e15256ffefb",
-                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -72,33 +64,6 @@
                     "name": "UpShift",
                     "type": "Button",
                     "id": "fa46a2f6-e305-4af2-beb3-1fde607bfdb2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LeftTurnSignal",
-                    "type": "Button",
-                    "id": "aafa7720-7c36-4ace-9339-720230003692",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "RightTurnSignal",
-                    "type": "Button",
-                    "id": "884ca6b8-9cfc-4114-8ac3-5315903d0374",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "HazardLights",
-                    "type": "Button",
-                    "id": "83c898ed-9cb5-465d-a47b-de4cb521a7aa",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -143,149 +108,6 @@
             ],
             "bindings": [
                 {
-                    "name": "AD",
-                    "id": "b0e48d90-352f-4d70-a42f-2f2354c42eec",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "caee29e5-eef1-4fdd-a03c-92bf836a067e",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "f1b5d76f-94ce-4820-8970-b1438493064f",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Arrows",
-                    "id": "c709da30-964e-4870-906d-777408781424",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "47ed1d45-4247-4fc9-a37b-d08a451527f6",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "22bd0138-614b-4164-a81b-db302b1398e1",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "93680bbd-4791-4e27-8b6f-7e0be807fe2d",
-                    "path": "<Gamepad>/leftStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "60ab877d-ff46-4396-bc37-0c969e225fdc",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4c074dbb-4d7c-402b-b013-fe368701931b",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c26f4032-4507-4326-a34e-e43d83594916",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "99b890fc-de48-4617-a0f1-8ecbe1ccf788",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d60a8d16-ef55-438c-affb-01c93b04af04",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5ae94992-bfc2-46f7-a5ca-44e3a7b852af",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "",
                     "id": "a340b63f-a5fd-49a4-aad6-cebba8aa0f84",
                     "path": "<Pointer>/delta",
@@ -304,149 +126,6 @@
                     "processors": "ScaleVector2(x=20,y=20)",
                     "groups": "",
                     "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8318bdfd-62ac-4bd4-92f7-d086c308664d",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Handbrake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "43d5ae17-0b1c-4ff5-8b89-8b49f6e15994",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Handbrake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5257b0ec-14f2-45ec-8972-18609840361f",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DownShift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "977ffad9-e93e-4ca4-a248-341478242844",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DownShift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ef150ded-e68b-4add-8bdc-4a71b00b364a",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UpShift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8f172098-9fec-4632-91f5-fa017498f970",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UpShift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "568a48ee-65ec-491d-9788-dc4599d070a3",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Restart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "376077f2-5949-4c1c-86b9-5d6828758470",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftTurnSignal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "15f6ebdc-c73a-436c-994c-38e662b4e5a0",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftTurnSignal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a8f845fa-c63d-4ba3-9212-d5f64e2cc717",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RightTurnSignal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f6bd5119-a2ce-424f-b1f4-16c12539f5c7",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RightTurnSignal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "da4ed660-b4ae-4e3c-8f65-1bbfac271e4b",
-                    "path": "<Keyboard>/h",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HazardLights",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "560a527f-7a2c-46fa-a470-679ce5bc5e9a",
-                    "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HazardLights",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -497,7 +176,7 @@
                 {
                     "name": "",
                     "id": "e31d1e54-a715-4d85-a628-06c3765e6e97",
-                    "path": "<Keyboard>/v",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -507,8 +186,8 @@
                 },
                 {
                     "name": "",
-                    "id": "7c09b70a-8e5d-45bc-b5cc-bcc4cb39f9f1",
-                    "path": "<Gamepad>/select",
+                    "id": "5b93c0a8-4215-45ab-aeb8-1d347b19b9d4",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button22",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -535,6 +214,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "StartCar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73ab9c86-364c-46a2-b38d-6195a03de08a",
+                    "path": "<HID::Gudsen MOZA R5 Base>/stick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f715fa0c-14be-4445-95c1-d4e4be51ff69",
+                    "path": "<HID::Gudsen MOZA R5 Base>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef7a5f67-ed45-45d4-8f41-5f0472c9beda",
+                    "path": "<HID::Gudsen MOZA R5 Base>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c009ad5-5102-4013-9336-913d2a91cbde",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button36",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75f82162-b15a-4221-b7e1-5117faac61bd",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button13",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DownShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "865d0673-c47f-4118-9cee-b0c0cb0e327d",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button14",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UpShift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
