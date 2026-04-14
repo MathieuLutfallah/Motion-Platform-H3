@@ -1,0 +1,238 @@
+{
+    "version": 1,
+    "name": "Ezereal Car Controller",
+    "maps": [
+        {
+            "name": "Car",
+            "id": "b74d231e-6ce4-4ff5-88b6-20c3017d963e",
+            "actions": [
+                {
+                    "name": "Steer",
+                    "type": "Value",
+                    "id": "1108afcb-3177-4eb5-b045-09910053710b",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Accelerate",
+                    "type": "Value",
+                    "id": "f34630ff-e16d-4903-9335-fa0e02a81cb0",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Brake",
+                    "type": "Value",
+                    "id": "68512edc-0312-4d01-b020-9719164ebf74",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DownShift",
+                    "type": "Button",
+                    "id": "e943e1de-0f0a-4958-8cc3-0a2cf49e29a1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UpShift",
+                    "type": "Button",
+                    "id": "fa46a2f6-e305-4af2-beb3-1fde607bfdb2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchCamera",
+                    "type": "Button",
+                    "id": "9a1db909-d00c-4f68-8429-05334d14d98a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "df6fff5d-c901-4e57-be3a-9302c349469e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e31d1e54-a715-4d85-a628-06c3765e6e97",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b93c0a8-4215-45ab-aeb8-1d347b19b9d4",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button22",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73ab9c86-364c-46a2-b38d-6195a03de08a",
+                    "path": "<HID::Gudsen MOZA R5 Base>/stick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f715fa0c-14be-4445-95c1-d4e4be51ff69",
+                    "path": "<HID::Gudsen MOZA R5 Base>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef7a5f67-ed45-45d4-8f41-5f0472c9beda",
+                    "path": "<HID::Gudsen MOZA R5 Base>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c009ad5-5102-4013-9336-913d2a91cbde",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button36",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3495d61-716a-4d21-b8a0-b85dffd07776",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75f82162-b15a-4221-b7e1-5117faac61bd",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button13",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DownShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "865d0673-c47f-4118-9cee-b0c0cb0e327d",
+                    "path": "<HID::Gudsen MOZA R5 Base>/button14",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UpShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard&Mouse",
+            "bindingGroup": "Keyboard&Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Touch",
+            "bindingGroup": "Touch",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Joystick",
+            "bindingGroup": "Joystick",
+            "devices": [
+                {
+                    "devicePath": "<Joystick>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "XR",
+            "bindingGroup": "XR",
+            "devices": [
+                {
+                    "devicePath": "<XRController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

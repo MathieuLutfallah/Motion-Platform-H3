@@ -21,215 +21,163 @@ public class Telemetry : MonoBehaviour
     // Stores velocity from previous frame to calculate acceleration
     Vector3 lastVelocity;
 
+    // =========================
+    // GAINS (adjustable in Inspector)
+    // =========================
+
+    // Scale factors for acceleration signals
+    public float lateralGain = 1f;
+    public float verticalGain = 1f;
+    public float accelGain = 1f;
+    public float brakeGain = 1f;
+
+    // Mixing factors for combining effects
+    public float pitchFromAccel = 0f;
+    public float rollFromLateral = 0f;
+    public float slopePitchGain = 1f;
+    public float slopeRollGain = 1f;
+
+    // Clamp limits to restrict output ranges
+    public float maxLat = 20f;
+    public float maxVert = 10f;
+    public float maxLong = 20f;
+
     void Awake()
     {
-        // Keep application running even when not focused
+        // Keep application running in background
         Application.runInBackground = true;
     }
 
     void Start()
     {
-        // Get Rigidbody component attached to this object
+        // Get Rigidbody component
         vehicleBody = GetComponent<Rigidbody>();
 
-        // Store initial velocity for later acceleration calculation
+        // Initialize last velocity
         if (vehicleBody != null)
             lastVelocity = vehicleBody.linearVelocity;
     }
 
-    void OnApplicationFocus(bool hasFocus)
-    {
-        // Ensure simulation continues when focus changes
-        Application.runInBackground = true;
-    }
-
-    void OnApplicationPause(bool pauseStatus)
-    {
-        // Ensure simulation continues when paused
-        Application.runInBackground = true;
-    }
-
     void FixedUpdate()
     {
-        // Stop execution if no Rigidbody exists
+        // Stop if no Rigidbody found
         if (vehicleBody == null) return;
 
         // Get fixed timestep
-        float deltaTime = Time.fixedDeltaTime;
+        float dt = Time.fixedDeltaTime;
+        if (dt <= 0f) return;
 
-        // Avoid division by zero
-        if (deltaTime <= 0f) return;
+        // =========================
+        // SPEED
+        // =========================
 
-
-        // -------------------------------------------------------
-        // VEHICLE SPEED
-        // -------------------------------------------------------
-
-        // Convert velocity magnitude from m/s to km/h
+        // Convert velocity from m/s to km/h
         float speed = vehicleBody.linearVelocity.magnitude * 3.6f;
 
+        // =========================
+        // ACCELERATION
+        // =========================
 
-        // -------------------------------------------------------
-        // ACCELERATION CALCULATION
-        // -------------------------------------------------------
-
-        // Calculate acceleration based on velocity change over time
-        Vector3 acceleration =
-            (vehicleBody.linearVelocity - lastVelocity) / deltaTime;
+        // Calculate acceleration from velocity change
+        Vector3 accel =
+            (vehicleBody.linearVelocity - lastVelocity) / dt;
 
         // Store current velocity for next frame
         lastVelocity = vehicleBody.linearVelocity;
 
         // Convert world acceleration into local vehicle space
-        Vector3 localAccel = transform.InverseTransformDirection(acceleration);
+        Vector3 localAccel =
+            transform.InverseTransformDirection(accel);
 
-        // Convert acceleration into G-forces
+        // Convert to G-forces
         float latG = -localAccel.x / 9.81f;
         float vertG = localAccel.y / 9.81f;
         float longG = localAccel.z / 9.81f;
 
+        // =========================
+        // ACCELERATION OUTPUT
+        // =========================
 
-        // -------------------------------------------------------
-        // MOTION GAINS
-        // -------------------------------------------------------
-
-        // Scale factors to tune motion intensity
-        float lateralGain = 8f;
-        float verticalGain = 5f;
-        float accelGain = 10f;
-        float brakeGain = 12f;
-
-
-        // -------------------------------------------------------
-        // LATERAL ACCELERATION
-        // -------------------------------------------------------
-
-        // Clamp lateral G-force to safe range
+        // Apply gain and clamp lateral acceleration
         float lateralAcceleration =
-            Mathf.Clamp(latG * lateralGain, -20f, 20f);
+            Mathf.Clamp(latG * lateralGain, -maxLat, maxLat);
 
-
-        // -------------------------------------------------------
-        // VERTICAL ACCELERATION
-        // -------------------------------------------------------
-
-        // Clamp vertical G-force
+        // Apply gain and clamp vertical acceleration
         float verticalAcceleration =
-            Mathf.Clamp(vertG * verticalGain, -10f, 10f);
+            Mathf.Clamp(vertG * verticalGain, -maxVert, maxVert);
 
+        // Apply different gains for acceleration and braking, then clamp
+        float longitudinalAcceleration =
+            longG < 0f
+            ? Mathf.Clamp(longG * brakeGain, -maxLong, maxLong)
+            : Mathf.Clamp(longG * accelGain, -maxLong, maxLong);
 
-        // -------------------------------------------------------
-        // LONGITUDINAL ACCELERATION
-        // -------------------------------------------------------
-
-        float longitudinalAcceleration;
-
-        // Use stronger gain for braking than acceleration
-        if (longG < 0f)
-        {
-            longitudinalAcceleration =
-                Mathf.Clamp(longG * brakeGain, -10f, 10f);
-        }
-        else
-        {
-            longitudinalAcceleration =
-                Mathf.Clamp(longG * accelGain, -10f, 10f);
-        }
-
-
-        // -------------------------------------------------------
-        // VEHICLE ORIENTATION
-        // -------------------------------------------------------
+        // =========================
+        // ORIENTATION
+        // =========================
 
         // Project forward vector onto horizontal plane
         Vector3 forwardOnPlane =
             Vector3.ProjectOnPlane(transform.forward, Vector3.up);
 
-        // Calculate pitch angle from slope
+        // Calculate pitch angle based on slope
         float slopePitch =
             Vector3.SignedAngle(forwardOnPlane, transform.forward, transform.right);
 
-        // Calculate roll angle from slope
+        // Calculate roll angle based on tilt
         float slopeRoll =
-            -Mathf.Asin(transform.right.y) * Mathf.Rad2Deg * 0.4f;
+            -Mathf.Asin(transform.right.y) * Mathf.Rad2Deg;
 
-        // Add roll effect from lateral acceleration
-        float swayRoll =
-            lateralAcceleration * 2.5f;
-
-        // Add pitch effect from acceleration and braking
-        float accelPitch =
-            longitudinalAcceleration * 1.2f;
-
-        // Scale slope contribution
-        float slopeGain = 1.5f;
-
-        // Combine pitch components
+        // Combine slope and acceleration influence for pitch
         float pitch =
-            -slopePitch * slopeGain + accelPitch;
+            -slopePitch * slopePitchGain
+            + longitudinalAcceleration * pitchFromAccel;
 
-        // Combine roll components
+        // Combine slope and lateral acceleration for roll
         float roll =
-            slopeRoll + swayRoll;
+            slopeRoll * slopeRollGain
+            + lateralAcceleration * rollFromLateral;
 
-        // Limit pitch and roll to realistic angles
+        // Clamp pitch and roll to realistic limits
         pitch = Mathf.Clamp(pitch, -45f, 45f);
         roll = Mathf.Clamp(roll, -45f, 45f);
 
-        // Normalize yaw angle from rotation
+        // Normalize yaw angle
         float yaw =
             NormalizeAngle(vehicleBody.rotation.eulerAngles.y);
 
-
-        // -------------------------------------------------------
-        // RPM ESTIMATION
-        // -------------------------------------------------------
+        // =========================
+        // RPM
+        // =========================
 
         // Simple RPM estimation based on speed
         float rpm = 800f + speed * 30f;
-
-        // Define maximum RPM
         float maxRpm = 4500f;
-
-        // Fixed gear value
         int gear = 1;
 
+        // =========================
+        // PLACEHOLDER VALUES
+        // =========================
 
-        // -------------------------------------------------------
-        // TRACTION LOSS
-        // -------------------------------------------------------
-
-        // Placeholder value for lateral slip
+        // No real traction data available
         float lateralVelocity = 0f;
 
-
-        // -------------------------------------------------------
-        // SUSPENSION (DISABLED)
-        // -------------------------------------------------------
-
-        // Suspension values are not calculated, set to zero
+        // No suspension data available
         float suspensionFL = 0f;
         float suspensionFR = 0f;
         float suspensionRL = 0f;
         float suspensionRR = 0f;
 
-
-        // -------------------------------------------------------
-        // TERRAIN TYPE
-        // -------------------------------------------------------
-
-        // Constant terrain type for all wheels
+        // Constant terrain type
         uint terrainFL = 2;
         uint terrainFR = 2;
         uint terrainRL = 2;
         uint terrainRR = 2;
 
+        // =========================
+        // SEND TELEMETRY
+        // =========================
 
-        // -------------------------------------------------------
-        // SEND TELEMETRY DATA
-        // -------------------------------------------------------
-
-        // Send all calculated values to SimRacingStudio
         SimRacingStudio.SimRacingStudio_SendTelemetry(
             apiMode.PadRight(3).ToCharArray(),
             apiVersion,
@@ -262,10 +210,7 @@ public class Telemetry : MonoBehaviour
     float NormalizeAngle(float angle)
     {
         angle = angle % 360f;
-
-        if (angle > 180f)
-            angle -= 360f;
-
+        if (angle > 180f) angle -= 360f;
         return angle;
     }
 }
