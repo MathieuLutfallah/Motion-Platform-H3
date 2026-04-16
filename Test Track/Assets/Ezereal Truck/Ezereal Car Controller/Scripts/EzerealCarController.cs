@@ -8,6 +8,7 @@ namespace Ezereal
     public enum Gear
     {
         Reverse,
+        Neutral,
         Drive
     }
 
@@ -27,6 +28,7 @@ namespace Ezereal
 
         [SerializeField] TMP_Text currentSpeedTMP_UI;
         [SerializeField] TMP_Text currentSpeedTMP_Dashboard;
+        [SerializeField] TMP_Text currentGearTMP_Dashboard;
 
         [Header("Engine")]
         public float maxForwardSpeed = 140f;
@@ -50,7 +52,7 @@ namespace Ezereal
         float currentSteerAngle;
 
         public bool stationary = true;
-        public Gear currentGear = Gear.Drive;
+        public Gear currentGear = Gear.Neutral;
 
         WheelCollider[] wheels;
 
@@ -69,10 +71,6 @@ namespace Ezereal
                 rearRightWheelCollider
             };
         }
-
-        // =========================
-        // INPUT
-        // =========================
 
         public void OnSteer(InputAction.CallbackContext ctx)
         {
@@ -116,13 +114,10 @@ namespace Ezereal
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        // =========================
-        // PHYSICS
-        // =========================
-
         void FixedUpdate()
         {
             UpdateSpeed();
+            UpdateGearDisplay();
             ApplyMotor();
             ApplyBrakes();
             ApplySteering();
@@ -140,6 +135,8 @@ namespace Ezereal
                 finalTorque = torque * throttleInput;
             else if (currentGear == Gear.Reverse)
                 finalTorque = -torque * throttleInput;
+            else
+                finalTorque = 0f;
 
             if (brakeInput > 0.1f)
                 finalTorque = 0f;
@@ -181,13 +178,23 @@ namespace Ezereal
         void UpdateSpeed()
         {
 #if UNITY_6000_0_OR_NEWER
-            currentSpeed = Vector3.Dot(transform.forward, vehicleRB.linearVelocity) * 3.6f;
+            currentSpeed = vehicleRB.linearVelocity.magnitude * 3.6f;
 #else
-            currentSpeed = Vector3.Dot(transform.forward, vehicleRB.velocity) * 3.6f;
+            currentSpeed = vehicleRB.velocity.magnitude * 3.6f;
 #endif
 
-            float displaySpeed = Mathf.Abs(currentSpeed);
-            currentSpeedTMP_Dashboard.text = displaySpeed.ToString("F0");
+            int displaySpeed = Mathf.RoundToInt(currentSpeed);
+            currentSpeedTMP_Dashboard.text = displaySpeed.ToString();
+        }
+
+        void UpdateGearDisplay()
+        {
+            if (currentGear == Gear.Drive)
+                currentGearTMP_Dashboard.text = "D";
+            else if (currentGear == Gear.Reverse)
+                currentGearTMP_Dashboard.text = "R";
+            else
+                currentGearTMP_Dashboard.text = "N";
         }
 
         void UpdateStationary()

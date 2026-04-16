@@ -1,5 +1,4 @@
-# Unity project is inside "Test Track"
-
+# ========== Unity Generated Folders ==========
 /Test Track/[Ll]ibrary/
 /Test Track/[Tt]emp/
 /Test Track/[Oo]bj/
@@ -8,29 +7,33 @@
 /Test Track/[Ll]ogs/
 /Test Track/[Uu]ser[Ss]ettings/
 
-*.log
-
-# Blender
-*.blend1
-*.blend1.meta
-
-# Memory / recordings
+# ========== Unity Cache ==========
 /Test Track/[Mm]emoryCaptures/
 /Test Track/[Rr]ecordings/
 
-# Rider / Jetbrains
-/Test Track/[Aa]ssets/Plugins/Editor/JetBrains*
-*.DotSettings.user
+# ========== Asset meta temp ==========
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
 
-# Visual Studio
+# ========== Logs ==========
+*.log
+
+# ========== Builds ==========
+*.apk
+*.aab
+*.app
+*.unitypackage
+
+# ========== Addressables ==========
+/Test Track/[Aa]ssets/StreamingAssets/aa*
+/Test Track/[Aa]ssets/AddressableAssetsData/*/*.bin*
+/Test Track/[Aa]ssets/Addressables_Temp*
+/Test Track/[Ss]erverData/
+
+# ========== Visual Studio / Rider ==========
 .vs/
-
-# Gradle
-.gradle/
-
-# Solution files
-ExportedObj/
-.consulo/
+.idea/
 *.csproj
 *.unityproj
 *.sln
@@ -45,39 +48,29 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.DotSettings.user
 
-# Unity meta crash
-*.pidb.meta
-*.pdb.meta
-*.mdb.meta
+# ========== JetBrains Rider ==========
+/Test Track/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# ========== Gradle ==========
+.gradle/
+
+# ========== OS ==========
+.DS_Store
+Thumbs.db
+
+# ========== Crash ==========
 sysinfo.txt
 mono_crash.*
 
-# Builds
-*.apk
-*.aab
-*.unitypackage
-*.unitypackage.meta
-*.app
+# ========== Blender ==========
+*.blend1
+*.blend1.meta
 
-# Crashlytics
-crashlytics-build.properties
+# ========== Visual Scripting ==========
+/Test Track/[Aa]ssets/Unity.VisualScripting.Generated/
 
-# Test scenes
-InitTestScene*.unity*
-
-# Addressables
-/Test Track/ServerData
-/Test Track/[Aa]ssets/StreamingAssets/aa*
-/Test Track/[Aa]ssets/AddressableAssetsData/link.xml*
-/Test Track/[Aa]ssets/Addressables_Temp*
-/Test Track/[Aa]ssets/AddressableAssetsData/*/*.bin*
-
-# Visual scripting
-/Test Track/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
-/Test Track/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
-/Test Track/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
-/Test Track/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
-
-# Auto scenes
-/Test Track/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+# ========== Optional ==========
+ExportedObj/
+.consulo/
