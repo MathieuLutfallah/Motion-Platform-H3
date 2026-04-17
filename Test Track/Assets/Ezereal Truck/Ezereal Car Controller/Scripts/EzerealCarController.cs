@@ -51,6 +51,8 @@ namespace Ezereal
         float targetSteerAngle;
         float currentSteerAngle;
 
+        public float ThrottleInput => throttleInput;
+
         public bool stationary = true;
         public Gear currentGear = Gear.Neutral;
 

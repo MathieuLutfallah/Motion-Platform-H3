@@ -1,0 +1,6 @@
+et the skin color of the nose and hands in the scene by changing the nose skin color.
+
+White: D29A7C
+Tan: C6865A
+Dark: 8A552F
+Black: 5A3A1F

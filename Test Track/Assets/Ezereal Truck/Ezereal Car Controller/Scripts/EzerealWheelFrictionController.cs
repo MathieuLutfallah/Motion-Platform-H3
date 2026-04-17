@@ -28,7 +28,6 @@ namespace Ezereal
             {
                 Debug.LogWarning("ezerealWheelFrictionController is missing ezerealCarController. Ignore it or attach one if you want to have friction controls.");
             }
-
         }
 
         void SetForwardFriction()
@@ -121,6 +120,7 @@ namespace Ezereal
             {
                 rLWSidewaysFriction.extremumSlip = 3f * currentHandbrakeValue;
                 rRWSidewaysFriction.extremumSlip = 3f * currentHandbrakeValue;
+
                 rLWSidewaysFriction.extremumValue = 0.7f * currentHandbrakeValue;
                 rRWSidewaysFriction.extremumValue = 0.7f * currentHandbrakeValue;
 
@@ -135,6 +135,7 @@ namespace Ezereal
             {
                 rLWSidewaysFriction.extremumSlip = 0.2f;
                 rRWSidewaysFriction.extremumSlip = 0.2f;
+
                 rLWSidewaysFriction.extremumValue = 1f;
                 rRWSidewaysFriction.extremumValue = 1f;
 
