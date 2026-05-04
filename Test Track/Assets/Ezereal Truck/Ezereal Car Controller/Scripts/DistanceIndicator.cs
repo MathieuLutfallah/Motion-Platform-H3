@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// tracks distance and time across session
 public class DistanceSession : MonoBehaviour
 {
     private static float savedDistance = 0f;
@@ -20,20 +21,24 @@ public class DistanceSession : MonoBehaviour
 
     void Update()
     {
+        // distance step
         float distance = Vector3.Distance(transform.position, lastPosition);
 
         totalDistance += distance;
         lastPosition = transform.position;
 
+        // time
         sessionTime += Time.deltaTime;
         logTimer += Time.deltaTime;
 
+        // log every 1s
         if (logTimer >= 1f)
         {
             Debug.Log("Distanz: " + totalDistance.ToString("F1") + " m | Zeit: " + sessionTime.ToString("F1") + " s");
             logTimer = 0f;
         }
 
+        // reset key
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             ResetSession();
@@ -42,6 +47,7 @@ public class DistanceSession : MonoBehaviour
 
     void OnDisable()
     {
+        // save state
         savedDistance = totalDistance;
         savedTime = sessionTime;
     }

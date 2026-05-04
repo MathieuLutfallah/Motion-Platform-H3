@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Ezereal
 {
+    // wheel friction control
     public class EzerealWheelFrictionController : MonoBehaviour
     {
         [Header("Ezereal References")]
@@ -30,6 +31,7 @@ namespace Ezereal
             }
         }
 
+        // copy forward friction
         void SetForwardFriction()
         {
             fLWForwardFriction = new WheelFrictionCurve
@@ -69,6 +71,7 @@ namespace Ezereal
             };
         }
 
+        // copy sideways friction
         void SetSidewaysFriction()
         {
             fLWSidewaysFriction = new WheelFrictionCurve
@@ -107,13 +110,14 @@ namespace Ezereal
                 stiffness = ezerealCarController.rearRightWheelCollider.sidewaysFriction.stiffness * 1.3f
             };
 
-            // direkt anwenden
+            // apply
             ezerealCarController.frontLeftWheelCollider.sidewaysFriction = fLWSidewaysFriction;
             ezerealCarController.frontRightWheelCollider.sidewaysFriction = fRWSidewaysFriction;
             ezerealCarController.rearLeftWheelCollider.sidewaysFriction = rLWSidewaysFriction;
             ezerealCarController.rearRightWheelCollider.sidewaysFriction = rRWSidewaysFriction;
         }
 
+        // drift on
         public void StartDrifting(float currentHandbrakeValue)
         {
             if (ezerealCarController != null)
@@ -129,6 +133,7 @@ namespace Ezereal
             }
         }
 
+        // drift off
         public void StopDrifting()
         {
             if (ezerealCarController != null)

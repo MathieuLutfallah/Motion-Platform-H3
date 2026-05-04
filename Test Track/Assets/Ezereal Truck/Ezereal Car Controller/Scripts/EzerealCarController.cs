@@ -12,6 +12,7 @@ namespace Ezereal
         Drive
     }
 
+    // car controller
     public class EzerealCarController : MonoBehaviour
     {
         public Rigidbody vehicleRB;
@@ -126,6 +127,7 @@ namespace Ezereal
             UpdateStationary();
         }
 
+        // motor torque
         void ApplyMotor()
         {
             float speedFactor = Mathf.InverseLerp(0, maxForwardSpeed, Mathf.Abs(currentSpeed));
@@ -147,6 +149,7 @@ namespace Ezereal
             rearRightWheelCollider.motorTorque = finalTorque;
         }
 
+        // brakes
         void ApplyBrakes()
         {
             float brakeTorque = brakeInput * brakePower;
@@ -158,6 +161,7 @@ namespace Ezereal
             rearRightWheelCollider.brakeTorque = brakeTorque * 0.5f;
         }
 
+        // steering
         void ApplySteering()
         {
             currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteerAngle, Time.deltaTime * steeringSpeed);
@@ -171,12 +175,14 @@ namespace Ezereal
             UpdateWheel(rearRightWheelCollider, rearRightWheelMesh);
         }
 
+        // sync wheel mesh
         void UpdateWheel(WheelCollider col, Transform mesh)
         {
             col.GetWorldPose(out Vector3 pos, out Quaternion rot);
             mesh.SetPositionAndRotation(pos, rot);
         }
 
+        // speed kmh
         void UpdateSpeed()
         {
 #if UNITY_6000_0_OR_NEWER
@@ -189,6 +195,7 @@ namespace Ezereal
             currentSpeedTMP_Dashboard.text = displaySpeed.ToString();
         }
 
+        // gear ui
         void UpdateGearDisplay()
         {
             if (currentGear == Gear.Drive)
@@ -199,6 +206,7 @@ namespace Ezereal
                 currentGearTMP_Dashboard.text = "N";
         }
 
+        // standing check
         void UpdateStationary()
         {
             if (
@@ -212,6 +220,7 @@ namespace Ezereal
                 stationary = false;
         }
 
+        // all wheels off ground
         public bool InAir()
         {
             foreach (WheelCollider wheel in wheels)

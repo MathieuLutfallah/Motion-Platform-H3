@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Ezereal
 {
+    // engine audio control
     public class EngineSoundController : MonoBehaviour
     {
         [Header("Audio Sources")]
@@ -29,38 +30,39 @@ namespace Ezereal
             float rpm = GetAverageRPM();
             float normalized = Mathf.Clamp01(rpm / maxRPM);
 
-            // throttle weich glätten
+            // smooth throttle
             throttleSmooth = Mathf.Lerp(throttleSmooth, car.ThrottleInput, Time.deltaTime * smoothSpeed);
 
             float onFactor = throttleSmooth;
             float offFactor = 1f - throttleSmooth;
 
-            // Idle
+            // idle
             float idleTarget = Mathf.Clamp01(1f - normalized * 3f);
             idle.volume = Mathf.Lerp(idle.volume, idleTarget * 0.25f, Time.deltaTime * smoothSpeed);
 
-            // LOW
+            // low band
             float lowBase = Mathf.Clamp01(normalized * 2f);
             low_on.volume = Mathf.Lerp(low_on.volume, lowBase * onFactor, Time.deltaTime * smoothSpeed);
             low_off.volume = Mathf.Lerp(low_off.volume, lowBase * offFactor, Time.deltaTime * smoothSpeed);
 
-            // MEDIUM
+            // medium band
             float medBase = Mathf.Clamp01((normalized - 0.25f) * 2f);
             medium_on.volume = Mathf.Lerp(medium_on.volume, medBase * onFactor, Time.deltaTime * smoothSpeed);
             medium_off.volume = Mathf.Lerp(medium_off.volume, medBase * offFactor, Time.deltaTime * smoothSpeed);
 
-            // HIGH
+            // high band
             float highBase = Mathf.Clamp01((normalized - 0.55f) * 2f);
             high_on.volume = Mathf.Lerp(high_on.volume, highBase * onFactor, Time.deltaTime * smoothSpeed);
             high_off.volume = Mathf.Lerp(high_off.volume, highBase * offFactor, Time.deltaTime * smoothSpeed);
 
-            // Pitch
+            // pitch
             float pitch = 0.8f + normalized * 1.5f;
 
             SetPitch(low_on, medium_on, high_on, pitch);
             SetPitch(low_off, medium_off, high_off, pitch);
         }
 
+        // set pitch
         void SetPitch(AudioSource a, AudioSource b, AudioSource c, float pitch)
         {
             a.pitch = pitch;
@@ -68,6 +70,7 @@ namespace Ezereal
             c.pitch = pitch;
         }
 
+        // rear wheel rpm avg
         float GetAverageRPM()
         {
             float rpmL = Mathf.Abs(car.rearLeftWheelCollider.rpm);
